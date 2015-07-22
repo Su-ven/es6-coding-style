@@ -31,7 +31,7 @@ for (var i=0; i<5; i++) {
 }
 console.log(i);
 
-//好
+// 好
 for (let i=0; i<5; i++) {
   console.log(i);
 }
@@ -67,13 +67,32 @@ const ANOTHER_OBJ = {
 
 - 2.1 模板字符串
 
-> 以反引号(`)标示，可用于普通字符串，多行字符串，拼接变量
+> 对于多行字符串，拼接变量的情况适用模板字符串，以反引号(`)标示
+
+> 可读性更强，代码更易编写
 
 ```js
-// 不好
+  // 不好
+  var multiStr = '多行字符串换行表示,\n 这是换行了。';
+  function sayHi(name) {
+    return 'How are you, ' + name + '?';
+  }
+
+  // 好
+  var multiStr = `多行字符串换行表示,
+                  这是换行了。`;
+ 
+  function sayHi(name) {
+    return `How are you, ${name}?`;
+  }
 ```
 
 #### 解构
+
+- 3.1 对象解构
+
+- 3.2 数组解构
+
 
 #### 数组
 
