@@ -369,6 +369,10 @@ function foo( opts = {}) {
 
 #### 类
 
+- 6.1 采用class
+
+>
+
 #### 模块
 
 TODO: 箭头函数
