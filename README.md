@@ -12,10 +12,9 @@
 2. [字符串 Strings](#字符串)
 3. [解构 Destructuring](#解构)
 4. [数组 Arrays](#数组)
-5. [参数依赖... Rest](#参数依赖)
-6. [函数 Functions](#函数)
-7. [类 Classes](#类)
-8. [模块 Modules](#模块)
+5. [函数 Functions](#函数)
+6. [类 Classes](#类)
+7. [模块 Modules](#模块)
 
 ### 声明
 - 1.1 变量
@@ -26,12 +25,19 @@
 
 ```js
 // 不好
+const variables; 
+const globalObj = null; // 非常量
+let globalObj = null; 
+
 for (var i=0; i<5; i++) {
   console.log(i);
 }
 console.log(i);
 
 // 好
+let variables;
+var globalObj = null; 
+
 for (let i=0; i<5; i++) {
   console.log(i);
 }
@@ -52,6 +58,7 @@ let SOME_ARR = ['不','变','数','组'];
 var ANOTHER_OBJ = {
   '不变对象': true
 };
+
 
 // 好
 const SOME_NUM = 123;
@@ -200,10 +207,55 @@ const [one, two] = arr;
 
 ```
 
-
 #### 数组
 
-#### 参数依赖
+- 4.1 将类数组(array-like)对象与可遍历对象(如Set,Map)转为真正数组，采用Array.from
+
+```js
+// 不好
+function foo(){
+  let args = Array.prototype.slice.call(arguments);
+}
+
+
+// 好
+function foo(){
+  let args = Array.from(arguments);
+}
+
+```
+- 4.2 数组去重
+
+> 结合Set结构与Array.from
+
+```js
+// 不好
+// 使用indexOf，HashTable等形式，不够简洁清晰
+
+
+// 好
+function deduplication(arr){
+  return Array.from(new Set(arr));
+}
+
+```
+- 4.3 数组拷贝
+
+> 采用数组扩展...形式
+
+```js
+const items = [1,2,3];
+// 不好
+const len = items.length;
+let copyTemp = [];
+for (let i=0; i<len; i++) {
+  copyTemp[i] = items[i];
+}
+
+
+// 好
+let copyTemp = [...items];
+```
 
 #### 函数
 
@@ -211,5 +263,6 @@ const [one, two] = arr;
 
 #### 模块
 
+TODO: 箭头函数
 
 
