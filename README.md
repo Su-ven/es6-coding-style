@@ -80,13 +80,13 @@ const ANOTHER_OBJ = {
 
 ```js
   // 不好
-  var multiStr = '多行字符串换行表示,\n 这是换行了。';
+  const multiStr = '多行字符串换行表示,\n 这是换行了。';
   function sayHi(name) {
     return 'How are you, ' + name + '?';
   }
 
   // 好
-  var multiStr = `多行字符串换行表示,
+  const multiStr = `多行字符串换行表示,
                   这是换行了。`;
  
   function sayHi(name) {
@@ -113,8 +113,8 @@ let obj = {
   ]
 };
 
-[(a)] = [11];
-var { a: (b) } = {};
+[(a)] = [11]; // a未定义
+let { a: (b) } = {}; // 解析出错
 
 
 // 好
@@ -125,7 +125,7 @@ let obj = {
   ]
 };
 
-var [a, b] = [11, 22];
+let [a, b] = [11, 22];
 
 ```
 
