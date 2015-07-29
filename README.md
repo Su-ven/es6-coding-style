@@ -209,7 +209,9 @@ const [one, two] = arr;
 
 #### 数组
 
-- 4.1 将类数组(array-like)对象与可遍历对象(如Set,Map)转为真正数组，采用Array.from
+- 4.1 将类数组(array-like)对象与可遍历对象(如Set,Map)转为真正数组
+
+> 采用Array.from进行转换
 
 ```js
 // 不好
@@ -256,8 +258,114 @@ for (let i=0; i<len; i++) {
 // 好
 let copyTemp = [...items];
 ```
+- 4.4 将一组数值转为数组
+
+> 采用Array.of进行转换
+
+```js
+// 不好
+let arr1 = new Array(2); // [undefined x 2]
+let arr2 = new Array(1,2,3); // [1, 2, 3]
+
+
+// 好
+let arr1 = Array.of(2);  // [2]
+let arr2 = Array.of(1,2,3); // [1, 2, 3]
+```
 
 #### 函数
+
+- 5.1 当要用函数表达式或匿名函数时，使用箭头函数(Arrow Functions)
+
+> 箭头函数更加简洁，绑定了this
+
+```js
+// 不好
+const foo = function(x){
+  console.log('存在函数提升问题');
+  console.log(foo.name); // 返回'' ，函数表达式不可命名，函数声明可以
+};
+
+[1, 2, 3].forEach(function(x){
+  return x + 1;
+});
+
+// 好
+const foo = x => {
+  console.log('不存在函数提升问题');
+  console.log(foo.name); // 返回'foo'
+};
+
+[1, 2, 3].forEach( x => {
+  return x + 1;
+});
+```
+
+- 5.1.1 箭头函数书写约定
+
+> 函数体只有单行语句时，允许写在同一行并去除花括号
+
+> 当函数只有一个参数时，允许去除参数外层的括号
+
+```js
+// 好
+const foo = x => x + x; // 注意此处会默认return x + x，有花括号语句块时不会return
+
+[1, 2, 3].map(x => x * x);
+
+```
+
+- 5.2 立即调用函数 IIFE
+
+> 使用箭头函数
+
+```js
+// 不好
+(function(){
+  console.log('哈');
+})();
+
+// 好
+(() => {
+  console.log('哈');
+})();
+
+```
+
+- 5.3 不使用 `arguments`, 采用rest语法...代替
+
+> rest参数是真正的数组，不需要再转换
+
+```js
+// 不好
+function foo(){
+  let args = Array.prototype.slice.call(arguments);
+  return args.join('');
+}
+
+// 好
+function foo(...args) {
+  return args.join('');
+}
+
+```
+
+- 5.4 函数参数指定默认值
+
+> 采用函数默认参数赋值语法
+
+```js
+// 不好
+function foo(opts) {
+  opts = opts || {};// 此处有将0，''等假值转换掉为默认值的副作用
+}
+
+
+// 好
+function foo( opts = {}) {
+  console.log('更加简洁，安全');
+}
+```
 
 #### 类
 
