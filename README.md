@@ -46,11 +46,11 @@ console.log(i);
 
 - 1.2 常量
 
-> 对于不再变化的值应使用const进行声明，常量命名应遵循字母全大写的通俗约定。
+> 对于常量应使用const进行声明，命名应遵循字母全大写的通俗约定
 
-> 对于immutable数据应使用const进行声明
+> 对于immutable数据（不再变化的值）应使用const进行声明
 
-> 应注意const与let只在声明所在的块级作用域内有效。
+> 应注意const与let只在声明所在的块级作用域内有效
 
 ```js
 // 不好
@@ -87,10 +87,10 @@ const ANOTHER_OBJ = {
     return 'How are you, ' + name + '?';
   }
 
+
   // 好
   const multiStr = `多行字符串换行表示,
                   这是换行了。`;
- 
   function sayHi(name) {
     return `How are you, ${name}?`;
   }
@@ -157,9 +157,11 @@ function anotherFun(){
 
 const [one, three, two] = anotherFun(); // 顺序乱了
 
+
 // 语法错误
 let a;
 {a} = {a: 123};
+
 
 // 好
 function someFun(opt){
@@ -201,6 +203,7 @@ y = temp;
 
 const one = arr[0];
 const two = arr[1];
+
 
 // 好
 [x, y] = [y, x]; // 交换变量
@@ -249,6 +252,7 @@ function deduplication(arr){
 
 ```js
 const items = [1,2,3];
+
 // 不好
 const len = items.length;
 let copyTemp = [];
@@ -279,7 +283,7 @@ let arr2 = Array.of(1,2,3); // [1, 2, 3]
 
 - 5.1 当要用函数表达式或匿名函数时，使用箭头函数(Arrow Functions)
 
-> 箭头函数更加简洁，绑定了this
+> 箭头函数更加简洁，并且绑定了this
 
 ```js
 // 不好
@@ -291,6 +295,7 @@ const foo = function(x){
 [1, 2, 3].forEach(function(x){
   return x + 1;
 });
+
 
 // 好
 const foo = x => {
@@ -322,6 +327,7 @@ const foo = x => x + x; // 注意此处会默认return x + x，有花括号语�
 // 不好
 let test = x => {x:x}; // 花括号会变成语句块，不表示对象
 
+
 // 好
 let test = x => ({x:x}); // 使用括号可正确return {x:x}
 ```
@@ -335,6 +341,7 @@ let test = x => ({x:x}); // 使用括号可正确return {x:x}
 (function(){
   console.log('哈');
 })();
+
 
 // 好
 (() => {
@@ -355,6 +362,7 @@ function foo(){
   let args = Array.prototype.slice.call(arguments);
   return args.join('');
 }
+
 
 // 好
 function foo(...args) {
