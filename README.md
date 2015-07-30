@@ -413,14 +413,14 @@ const shopObj = {
 
 #### 类
 
-> 类名应使用帕斯卡写法(PascalCased)
+- 6.1 类名应使用帕斯卡写法(PascalCased)
 
 ```js
 class SomeClass{
 }
 ```
 
-> 定义类时，方法的顺序如下：
+- 6.2 定义类时，方法的顺序如下：
 
 - `constructor`
 
@@ -465,7 +465,7 @@ class SomeClass {
 
 ```
 
-> 如果不是class类，不使用new
+- 6.3 如果不是class类，不使用new
 
 ```js
 // 不好
@@ -481,7 +481,7 @@ const foo = new Foo();
 ```
 
 
-- 6.1 使用真正意思上的类Class写法，不使用prototype进行模拟扩展
+- 6.4 使用真正意思上的类Class写法，不使用prototype进行模拟扩展
 
 > Class更加简洁，易维护
 
@@ -507,7 +507,7 @@ class Dog {
 }
 ```
 
-- 6.2 class应先定义后使用
+- 6.5 class应先定义后使用
 
 > 虽然规范里class不存在hoist问题，但转换工具如babel，只是转换为函数表达式，此处仍有hoist
 
@@ -528,19 +528,53 @@ class SubFoo extends Foo {
 }
 ```
 
-- 6.3 立即执行的类使用类表达式的写法
-
-> 
-
-- 6.4 使用expend,super
-
-- 6.5 this
-- 
+- 6.6 this的注意事项
+ 
 > 子类使用super关键字时，this应在调用super之后才能使用
 
+> 可在方法中return this来实现链式调用写法
+
+```js
+class Foo {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+// 不好
+class SubFoo extends Foo {
+  constructor(x, y, z) {
+    this.z = z; // 引用错误
+    super(x, y);
+  }
+}
+
+
+// 好
+class SubFoo extends Foo {
+  constructor(x, y, z) {
+    super(x, y);
+    this.z = z; // this 放在 super 后调用
+  }
+  setHeight(height) {
+    this.height = height;
+    return this;
+  }
+}
+```
 
 
 #### 模块
+
+- 7.1 使用`import / export`来做模块加载导出，不使用非标准模块写法
+
+
+- 7.2 import 不使用统配符 `* `进行导入
+
+- 7.3 不要将import与export混合在一行
+
+> 分开导入与导出，让结构更清晰一些
 
 
 
