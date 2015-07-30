@@ -422,15 +422,15 @@ class SomeClass{
 
 - 6.2 定义类时，方法的顺序如下：
 
-- `constructor`
+  - `constructor`
 
-- public `get/set` 公用访问器，set只能传一个参数
+  - public `get/set` 公用访问器，set只能传一个参数
 
-- public methods 公用方法，以函数命名区分，不带下划线
+  - public methods 公用方法，以函数命名区分，不带下划线
 
-- private `get/set` 私有访问器，私有相关命名应加上下划线`_`为前缀
+  - private `get/set` 私有访问器，私有相关命名应加上下划线`_`为前缀
 
-- provate methods 私有方法 
+  - provate methods 私有方法 
 
 ```js
 class SomeClass {
