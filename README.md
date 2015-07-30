@@ -430,7 +430,7 @@ const shopObj = {
 ```
 
 
-#### 类
+#### 类 Classes
 
 - 6.1 类名应使用帕斯卡写法(PascalCased)
 
