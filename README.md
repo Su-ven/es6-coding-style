@@ -388,14 +388,160 @@ function foo( opts = {}) {
 }
 ```
 
+- 5.5 对象中的函数方法使用缩写形式
+
+> 更加简洁
+
+```js
+// 不好
+const shopObj = {
+  des: '对象模块写法',
+  foo: function(){
+    console.log('对象中的方法');
+  }
+};
+
+// 好
+const shopObj = {
+  des: '对象模块写法',
+  foo(){
+    console.log('对象中的方法');
+  }
+};
+```
+
+
 #### 类
 
-- 6.1 采用class
+> 类名应使用帕斯卡写法(PascalCased)
 
->
+```js
+class SomeClass{
+}
+```
+
+> 定义类时，方法的顺序如下：
+
+- `constructor`
+
+- public `get/set` 公用访问器，set只能传一个参数
+
+- public methods 公用方法，以函数命名区分，不带下划线
+
+- private `get/set` 私有访问器，私有相关命名应加上下划线`_`为前缀
+
+- provate methods 私有方法 
+
+```js
+class SomeClass {
+  constructor() {
+    // constructor
+  }
+  
+  get aval() {
+    // public getter
+  }
+  
+  set aval(val) {
+    // public setter
+  }
+  
+  doSth() {
+    // 公用方法
+  }
+  
+  get _aval() {
+    // private getter
+  }
+  
+  set _aval() {
+    // private setter
+  }
+  
+  _doSth() {
+    // 私有方法
+  }
+}
+
+```
+
+> 如果不是class类，不使用new
+
+```js
+// 不好
+function Foo() {
+}
+const foo = new Foo();
+
+
+// 好
+class Foo() {
+}
+const foo = new Foo();
+```
+
+
+- 6.1 使用真正意思上的类Class写法，不使用prototype进行模拟扩展
+
+> Class更加简洁，易维护
+
+```js
+// 不好
+function Dog(names = []) {
+  this._names = [...names];
+}
+Dog.prototype.bark = function(){
+  const currName = this._names[0];
+  alert(`one one ${currName}`);
+}
+
+// 好
+class Dog {
+  constructor(names = []){
+    this._name = [...names];
+  }
+  bark() {
+    const currName = this._names[0];
+    alert(`one one ${currName}`);
+  }
+}
+```
+
+- 6.2 class应先定义后使用
+
+> 虽然规范里class不存在hoist问题，但转换工具如babel，只是转换为函数表达式，此处仍有hoist
+
+> 使用继承时，应先定义父类再定义子类
+
+```js
+// 不好
+let foo = new Foo();
+class Foo { } 
+
+
+// 好
+class Foo { }
+let foo = new Foo();
+
+class SubFoo extends Foo {
+  
+}
+```
+
+- 6.3 立即执行的类使用类表达式的写法
+
+> 
+
+- 6.4 使用expend,super
+
+- 6.5 this
+- 
+> 子类使用super关键字时，this应在调用super之后才能使用
+
+
 
 #### 模块
 
-TODO: 箭头函数
+
 
 
