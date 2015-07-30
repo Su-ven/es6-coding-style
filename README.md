@@ -6,6 +6,8 @@
 
 > 应注意目前的代码转换工具(如Babel，traceur)不够完善,有些特性须谨慎使用
 
+### [ES6 Coding Style English Version](https://github.com/gf-web/es6-coding-style/edit/master/es6-coding-style.md)
+
 ## 规范内容 
 
 1. [声明 Declarations](#声明)
@@ -15,8 +17,7 @@
 5. [函数 Functions](#函数)
 6. [类 Classes](#类)
 7. [模块 Modules](#模块)
-
-## [ES6 Coding Style English Version](https://github.com/gf-web/es6-coding-style/edit/master/es6-coding-style.md)
+8. 
 
 ### 声明
 - 1.1 变量
@@ -585,9 +586,26 @@ export default lightRed;
 
 ```
 
-- 7.2 import 不使用统配符 `* `进行导入
+- 7.2 应确保每个module有且只有一个默认导出模块
 
-> 这样确保能有一个默认导出模块
+> 方便调用方使用
+
+```js
+// 不好
+const lightRed = '#F07';
+
+export lightRed;
+
+
+// 好
+const lightRed = '#F07';
+
+export default lightRed;
+```
+
+- 7.3 import 不使用统配符 `* ` 进行整体导入
+
+> 确保模块与模块之间的关系比较清晰 
 
 ```js
 // 不好
@@ -598,9 +616,9 @@ import colors from './colors';
 
 ```
 
-- 7.3 不要将import与export混合在一行
+- 7.4 不要将import与export混合在一行
 
-> 分开导入与导出，让结构更清晰一些
+> 分开导入与导出，让结构更清晰，可读性更强
 
 ```js
 // 不好
@@ -611,4 +629,21 @@ import { lightRed } from './colors';
 export default lightRed;
 ```
 
+- 7.5 多变量要export时应以对象解构形式输出
+
+> export置于底部，使欲导出变量更加清晰
+
+```js
+// 不好
+export const lightRed = '#F07';
+export const black  = '#000';
+export const white  = '#FFF';
+
+// 好
+const lightRed = '#F07';
+const black  = '#000';
+const white  = '#FFF';
+
+export default { lightRed, black, white };
+```
 
