@@ -36,6 +36,7 @@ for (var i=0; i<5; i++) {
 }
 console.log(i);
 
+
 // 好
 let variables;
 var globalObj = null; 
