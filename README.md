@@ -6,7 +6,7 @@
 
 > 应注意目前的代码转换工具(如Babel，traceur)不够完善,有些特性须谨慎使用
 
-### [ES6 Coding Style English Version](https://github.com/gf-web/es6-coding-style/edit/master/es6-coding-style.md)
+### [ES6 Coding Style English Version](https://github.com/gf-web/es6-coding-style/edit/master/es6-coding-style-en.md)
 
 ## 规范内容 
 
@@ -17,7 +17,6 @@
 5. [函数 Functions](#函数)
 6. [类 Classes](#类)
 7. [模块 Modules](#模块)
-8. 
 
 ### 声明
 - 1.1 变量
