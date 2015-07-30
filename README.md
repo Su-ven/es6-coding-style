@@ -569,6 +569,17 @@ class SubFoo extends Foo {
 
 - 7.1 使用`import / export`来做模块加载导出，不使用非标准模块写法
 
+```js
+// 不好
+const colors  = require('./colors');
+module.exports = color.lightRed;
+
+
+// 好
+import { lightRed } from './colors';
+export default lightRed;
+
+```
 
 - 7.2 import 不使用统配符 `* `进行导入
 
