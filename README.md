@@ -101,9 +101,7 @@ const ANOTHER_OBJ = {
 
 #### 解构
 
-> 嵌套结构的对象层数不能超过3层
-
-> 解构语句中统一不使用圆括号
+- 3.1 嵌套结构的对象层数不能超过3层
 
 ```js 
 // 不好
@@ -118,9 +116,6 @@ let obj = {
   ]
 };
 
-[(a)] = [11]; // a未定义
-let { a: (b) } = {}; // 解析出错
-
 
 // 好
 let obj = {
@@ -130,20 +125,26 @@ let obj = {
   ]
 };
 
-let [a, b] = [11, 22];
-
 ```
 
+- 3.2 解构语句中统一不使用圆括号
 
-- 3.1 对象解构
+```js
+// 不好
+[(a)] = [11]; // a未定义
+let { a: (b) } = {}; // 解析出错
 
-> 若函数形参为对象时，使用对象解构赋值
+// 好
+let [a, b] = [11, 22];
+```
 
-> 若函数有多个返回值时，使用对象解构，不使用数组解构，避免添加顺序的问题
+- 3.3 对象解构
 
-> 对象指定默认值时仅对恒等于undefined(!== null)的情况生效
+> 对象解构 元素与顺序无关
 
-> 已声明的变量不能用于解构赋值（语法错误）
+> 对象指定默认值时仅对恒等于undefined ( !== null ) 的情况生效
+
+ - 3.3.1 若函数形参为对象时，使用对象解构赋值
 
 ```js
 // 不好
@@ -152,18 +153,6 @@ function someFun(opt) {
   let opt2 = opt.opt2;
   console.log(op1);
 }
-
-function anotherFun(){
-  const one = 1, two = 2, three = 3;
-  return [one, two, three];
-}
-
-const [one, three, two] = anotherFun(); // 顺序乱了
-
-
-// 语法错误
-let a;
-{a} = {a: 123};
 
 
 // 好
@@ -175,28 +164,47 @@ function someFun(opt){
 function someFun( {opt1, opt2} ){
   console.log(opt1);
 }
+```
 
+ - 3.3.2 若函数有多个返回值时，使用对象解构，不使用数组解构，避免添加顺序的问题
+
+```js
+// 不好
+
+function anotherFun(){
+  const one = 1, two = 2, three = 3;
+  return [one, two, three];
+}
+
+const [one, three, two] = anotherFun(); // 顺序乱了
+
+// 好
 function anotherFun(){
   const one = 1, two = 2, three = 3;
   return { one, two, three };
 }
 
 const { one, three, two } = anotherFun(); // 不用管顺序
+```
+
+ - 3.3.3 已声明的变量不能用于解构赋值（语法错误）
+
+```js
+// 语法错误
+let a;
+{a} = {a: 123};
 
 ```
 
-- 3.2 数组解构
-
-> 交换变量的值
-
-> 将数组成员赋值给变量时，使用数组解构
+- 3.4 数组解构
 
 > 数组元素与顺序相关
 
+ -3.4.1 交换变量的值
+ 
 ```js
 let x = 1;
 let y = 2;
-const arr = [1,2,3,4,5];
 
 // 不好
 let temp;
@@ -204,15 +212,23 @@ temp = x;
 x = y;
 y = temp;
 
+
+// 好
+[x, y] = [y, x]; // 交换变量
+```
+
+ - 3.4.2 将数组成员赋值给变量时，使用数组解构
+
+```js
+const arr = [1,2,3,4,5];
+
+// 不好
 const one = arr[0];
 const two = arr[1];
 
 
 // 好
-[x, y] = [y, x]; // 交换变量
-
 const [one, two] = arr;
-
 ```
 
 #### 数组
