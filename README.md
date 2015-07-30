@@ -6,7 +6,7 @@
 
 > 应注意目前的代码转换工具(如Babel，traceur)不够完善,有些特性须谨慎使用
 
-## 规范内容
+## 规范内容 
 
 1. [声明 Declarations](#声明)
 2. [字符串 Strings](#字符串)
@@ -15,6 +15,8 @@
 5. [函数 Functions](#函数)
 6. [类 Classes](#类)
 7. [模块 Modules](#模块)
+
+## [ES6 Coding Style English Version](https://github.com/gf-web/es6-coding-style/edit/master/es6-coding-style.md)
 
 ### 声明
 - 1.1 变量
@@ -50,7 +52,7 @@ console.log(i);
 
 > 对于immutable数据（不再变化的值）应使用const进行声明
 
-> 应注意const与let只在声明所在的块级作用域内有效
+> 注意: const与let只在声明所在的块级作用域内有效
 
 ```js
 // 不好
@@ -569,6 +571,8 @@ class SubFoo extends Foo {
 
 - 7.1 使用`import / export`来做模块加载导出，不使用非标准模块写法
 
+> 跟着标准走的人，运气总不会太差 
+
 ```js
 // 不好
 const colors  = require('./colors');
@@ -583,10 +587,28 @@ export default lightRed;
 
 - 7.2 import 不使用统配符 `* `进行导入
 
+> 这样确保能有一个默认导出模块
+
+```js
+// 不好
+import * as colors from './colors';
+
+// 好
+import colors from './colors';
+
+```
+
 - 7.3 不要将import与export混合在一行
 
 > 分开导入与导出，让结构更清晰一些
 
+```js
+// 不好
+export { lightRed as default } from './colors';
 
+// 好
+import { lightRed } from './colors';
+export default lightRed;
+```
 
 
